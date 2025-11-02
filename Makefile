@@ -1,0 +1,16 @@
+TARGET=hello
+CC=gcc
+OUTDIR=build
+FILENAME=hello.c
+FILENAME_O=hello.o
+NEW_FILENAME=src/hello.c
+all: ${TARGET}
+${TARGET}: ${FILENAME_O} ${OUTDIR}
+	${CC} ${OUTDIR}/${FILENAME_O} -o ${OUTDIR}/${TARGET}
+	cp ${NEW_FILENAME} ${OUTDIR}/${FILENAME}
+${OUTDIR}:
+	mkdir ${OUTDIR}
+${FILENAME_O}: ${NEW_FILENAME} ${OUTDIR}
+	${CC} -c ${NEW_FILENAME} -o ${OUTDIR}/${FILENAME_O}
+clean:
+	rm -rf ${OUTDIR}
